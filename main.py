@@ -56,10 +56,10 @@ class MainHandler(webapp2.RequestHandler):
     def post(self):
 
         new_text = str(self.request.get("text"))
-        new_text = cgi.escape(new_text, quote=True)
         rotation_number = int(self.request.get("rotation"))
         response = encrypt(new_text, rotation_number)
-        self.response.write(response)
+        new_text = cgi.escape(response, quote=True)
+        self.response.write(new_text)
 
 app = webapp2.WSGIApplication([
     ('/', MainHandler)
